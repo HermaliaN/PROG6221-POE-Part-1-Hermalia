@@ -20,13 +20,46 @@ namespace CyberBotFinal
             //The above figgle font was found using chatGPT
             //OpenAI. 2025. ChatGPT(Version 4). [Large language model]. Available at: https://chatgpt.com/c/68050f30-2d30-8002-aadf-7aa1214305c0 [Accessed: 20 April 2025].
 
+            //welcome greeting and instructions to the user 
+            Console.WriteLine("Welcome to the Cybersecurity Bot! I'm here to help educate you on cybersecurity topics.");
+
+            //asks the user for their name 
+            Console.Write("I go by the name CBot, what's your name? ");
+            string name = Console.ReadLine();
+            Console.WriteLine($"Nice to meet you {name}!\nType out a question for me and click enter OR type 'exit' to leave.");
+            Console.Write("---------------------------------------------------------------------------------------------------------------\n");
+
+            //continually allows the user to type to the bot and validates that the user types something
+            while (true)
+            {
+                //displays the users name for a more personalised user experience 
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write($"{name}: ");
+                Console.ResetColor();
+
+                string userInput = Console.ReadLine().ToLower().Trim();
+
+                if (userInput == "")
+                {
+                    Console.Write("---------------------------------------------------------------------------------------------------------------\n");
+                    Console.WriteLine("CBot: I noticed your response was blank. Please type out a question OR type 'exit' to leave.");
+                    Console.Write("---------------------------------------------------------------------------------------------------------------\n");
+                    continue;
+                }
+
+                //calls the method for the bot to respond to the users input
+               // botResponse(userInput); adding method in the next commit
+
+                if (userInput.Contains("exit"))
+                    break;
+            }
+        }
 
 
 
 
-
-            //plays the sound of the wav file that is passed into the method
-            static void playSound(string path, bool playSync) //playsync is used to allow the goodbye.wav sound to finish playing before exiting
+        //plays the sound of the wav file that is passed into the method
+        static void playSound(string path, bool playSync) //playsync is used to allow the goodbye.wav sound to finish playing before exiting
             {
                 try
                 {
