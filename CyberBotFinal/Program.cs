@@ -85,7 +85,7 @@ namespace CyberBotFinal
             //The above use of playSync was aided by ChatGPT. Link to the chat provided below.
             //OpenAI. 2025. ChatGPT(Version 4). [Large language model]. Available at: https://chatgpt.com/c/68050ee0-2cd0-8002-8684-bae79e6d18f9[Accessed: 20 April 2025].
 
-        }
+        
 
     }
 }
