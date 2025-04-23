@@ -55,7 +55,77 @@ namespace CyberBotFinal
             }
         }
 
+        //method that contains a dictionary with responses to the user from the bot
+        //also displays the repsonses and handles an error if the user input was invalid
+        static void botResponse(string input)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
+            var responses = new Dictionary<List<string>, string>
+            {
+                { new List<string> {"how are you", "how you doing"},
+                  "I'm doing well, I hope you are too!"},
+
+                { new List<string> {"purpose", "what do you do"},
+                  "I'm here to help spread awareness about cybersecurity by educating users. \nFeel free to ask me questions :)"},
+
+                { new List<string> {"password", "password safety", "passwords"},
+                  "It is important to have a strong password that has more than 8 characters, with lowercase, " +
+                  "\nuppercase,numbers and symbols. Remember to avoid using the same password in multiple places."},
+
+                { new List<string> {"phishing", "email phishing"},
+                  "Phishing is an attack often carried out on emails.\n Beware of suspicious links from unknown senders."},
+
+                { new List<string> {"safe browsing"},
+                  "Install a firewall on your browser like McAFee. Look for 'https' in the link."},
+
+                { new List<string> {"what can i ask", "what do you know"},
+                  "Ask me about my purpose, passwords, phishing and safe browsing."},
+
+                { new List<string> {"exit"},
+                  "Goodbye!"}
+            };
+
+            bool foundMatch = false;
+
+            //writes out the correct response to the user input according to the dictionary
+            foreach (var entry in responses)
+            {
+                foreach (var keyword in entry.Key)
+                {
+                    if (input.Contains(keyword))
+                    {
+                        Console.Write("---------------------------------------------------------------------------------------------------------------\n");
+                        Console.WriteLine($"CBot: {entry.Value}");
+                        Console.Write("---------------------------------------------------------------------------------------------------------------\n");
+
+                        //if the user types exit then play the goodbye audio file using playSound method
+                        if (entry.Value.Contains("Goodbye"))
+                        {
+                            playSound("goodbye.wav", true);
+                        }
+
+                        foundMatch = true;
+                        break;
+                    }
+                }
+
+                if (foundMatch)
+                    break;
+            }
+
+            //if there was NOT a response in the dictionary then the bot lets the user know 
+            //and plays unknown input audio with playSound method
+            if (!foundMatch)
+            {
+                Console.Write("---------------------------------------------------------------------------------------------------------------\n");
+                Console.WriteLine("CBot: Sorry I could not understand that. Please try rephrasing your question.");
+                Console.Write("---------------------------------------------------------------------------------------------------------------\n");
+                playSound("unknownInput.wav", false);
+            }
+
+            Console.ResetColor();
+        }
 
 
         //plays the sound of the wav file that is passed into the method
